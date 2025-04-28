@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Universe API",
+    "description": "API to create, update, delete a fictive universe",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost"
+    }
+  ],
+  "paths": {
+    "/universes": {
+      "post": {
+        "tags": [
+          "universe"
+        ],
+        "summary": "Create a new universe",
+        "description": "Create a new universe from universe definition in request body",
+        "operationId": "createUniverse",
+        "requestBody": {
+          "description": "Universe definition to create",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Universe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The Universe was successfully created.",
+            "headers": {
+              "Location": {
+                "description": "The created universe URI",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniverseCreated"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Universe": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "The Witch heritage"
+          },
+          "description": {
+            "type": "string",
+            "example": "A fantastic universe containing witches, vampires and demons. Three species in ..."
+          }
+        }
+      },
+      "UniverseCreated": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 12345
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "description": "RFC 9457 - Problem Details Object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Problem summary in few words",
+            "example": "Missing body object property : name"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Related HTTP status code.",
+            "example": 400
+          },
+          "detail": {
+            "type": "string",
+            "description": "Detailed problem explanation",
+            "example": "The Universe's `name` must be specified"
+          },
+          "instance": {
+            "type": "string",
+            "format": "uri",
+            "description": "Problem related URI",
+            "example": "/universe/12345"
+          }
+        }
+      }
+    }
+  }
+}
