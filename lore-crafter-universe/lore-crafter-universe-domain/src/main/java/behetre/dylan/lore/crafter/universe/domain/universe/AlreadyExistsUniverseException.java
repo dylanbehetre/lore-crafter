@@ -1,4 +1,4 @@
-package behetre.dylan.lore.crafter.universe.domain;
+package behetre.dylan.lore.crafter.universe.domain.universe;
 
 public class AlreadyExistsUniverseException extends Exception {
 

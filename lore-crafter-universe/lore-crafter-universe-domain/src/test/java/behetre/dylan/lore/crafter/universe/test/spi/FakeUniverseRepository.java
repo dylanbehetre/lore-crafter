@@ -1,6 +1,7 @@
 package behetre.dylan.lore.crafter.universe.test.spi;
 
-import behetre.dylan.lore.crafter.universe.domain.Universe;
+import behetre.dylan.lore.crafter.universe.domain.universe.Universe;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.spi.UniverseRepository;
 
 import java.util.Collection;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class FakeUniverseRepository implements UniverseRepository {
 
-    private final Map<String, Universe> universeByName;
+    private final Map<UniverseName, Universe> universeByName;
 
     public FakeUniverseRepository() {
         this(Collections.emptyList());
@@ -29,8 +30,8 @@ public class FakeUniverseRepository implements UniverseRepository {
     }
 
     @Override
-    public boolean contains(String name) {
-        return this.universeByName.containsKey(name);
+    public boolean contains(UniverseName universeName) {
+        return this.universeByName.containsKey(universeName);
     }
 
     public int getUniverseCount() {

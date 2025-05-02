@@ -1,4 +1,4 @@
-package behetre.dylan.lore.crafter.universe.domain;
+package behetre.dylan.lore.crafter.universe.domain.universe;
 
 import behetre.dylan.lore.crafter.universe.spi.UniverseRepository;
 
@@ -12,12 +12,8 @@ public class UniverseService {
         this.universeRepository = universeRepository;
     }
 
-    public Universe create(Universe universe) throws InvalidUniverseException, AlreadyExistsUniverseException {
-        if (universe.name() == null){
-            throw new InvalidUniverseException("Invalid universe: name is mandatory");
-        }
-
-        if (this.universeRepository.contains(universe.name())){
+    public Universe create(Universe universe) throws AlreadyExistsUniverseException {
+        if (this.universeRepository.contains(universe.name())) {
             throw new AlreadyExistsUniverseException(universe);
         }
 
