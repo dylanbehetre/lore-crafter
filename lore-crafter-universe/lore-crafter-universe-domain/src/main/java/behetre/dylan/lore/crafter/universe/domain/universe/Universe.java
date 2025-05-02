@@ -1,7 +1,9 @@
 package behetre.dylan.lore.crafter.universe.domain.universe;
 
 import behetre.dylan.lore.crafter.universe.domain.universe.description.UniverseDescription;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.universe.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
 
 import java.util.Objects;
 
@@ -17,8 +19,12 @@ public final class Universe {
     /**
      * @param name        name of the universe. Act as a functional identifier and must be unique
      * @param description universe's description
+     * @throws NullUniverseNameException if the name is null
      */
-    private Universe(UniverseName name, UniverseDescription description) {
+    private Universe(UniverseName name, UniverseDescription description) throws NullUniverseNameException {
+        if (name == null) {
+            throw new NullUniverseNameException();
+        }
         this.name = name;
         this.description = description;
     }
@@ -77,10 +83,10 @@ public final class Universe {
         /**
          * Sets the name of the universe
          *
-         * @param name the name of the universe
+         * @param name the name of the universe. Cannot be null or empty.
          * @return this builder for method chaining
          */
-        public UniverseBuilder withName(String name) {
+        public UniverseBuilder withName(String name) throws UniverseNameException {
             this.name = new UniverseName(name);
             return this;
         }
@@ -101,7 +107,7 @@ public final class Universe {
          *
          * @return a new Universe instance
          */
-        public Universe build() {
+        public Universe build() throws NullUniverseNameException {
             return new Universe(name, description);
         }
     }

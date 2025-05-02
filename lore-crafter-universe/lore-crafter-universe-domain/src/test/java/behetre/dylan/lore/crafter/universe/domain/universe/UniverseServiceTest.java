@@ -1,5 +1,6 @@
 package behetre.dylan.lore.crafter.universe.domain.universe;
 
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
 import behetre.dylan.lore.crafter.universe.test.spi.FakeUniverseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,14 @@ import java.util.List;
 
 class UniverseServiceTest {
 
-    final Universe validUniverse = Universe.builder()
-            .withName("Witchcraft's World")
-            .withDescription("A fantastic universe containing witches and wizards.")
-            .build();
+    final Universe validUniverse;
+
+    UniverseServiceTest() throws UniverseNameException {
+        this.validUniverse = Universe.builder()
+                .withName("Witchcraft's World")
+                .withDescription("A fantastic universe containing witches and wizards.")
+                .build();
+    }
 
     @Test
     void givenConformUniverse_whenCreate_thenUniverseCreated() throws Exception {

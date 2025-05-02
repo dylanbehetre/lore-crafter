@@ -1,5 +1,8 @@
 package behetre.dylan.lore.crafter.universe.domain.universe.name;
 
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.EmptyUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -8,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UniverseNameTest {
 
     @Test
-    void givenValidName_whenCreateIt_thenItIsCreated() {
+    void givenValidName_whenCreateIt_thenItIsCreated() throws UniverseNameException {
         // act
         final String validName = "My Universe";
 

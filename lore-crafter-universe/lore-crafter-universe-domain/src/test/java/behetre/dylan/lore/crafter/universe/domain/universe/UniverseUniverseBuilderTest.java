@@ -1,9 +1,10 @@
 package behetre.dylan.lore.crafter.universe.domain.universe;
 
 import behetre.dylan.lore.crafter.universe.domain.universe.description.UniverseDescription;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.EmptyUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.NullUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.EmptyUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.universe.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UniverseUniverseBuilderTest {
 
     @Test
-    void givenNameAndDescription_whenBuildUniverse_thenUniverseIsCreated() {
+    void givenNameAndDescription_whenBuildUniverse_thenUniverseIsCreated() throws UniverseNameException {
         // Given
         String name = "Test Universe";
         String description = "This is a test universe";
@@ -44,13 +45,12 @@ class UniverseUniverseBuilderTest {
     @Test
     void givenEmptyName_whenBuildUniverse_thenThrowEmptyUniverseNameException() {
         // Given
-        Universe.UniverseBuilder builder = Universe.builder()
-                .withName("");
+        final String emptyName = "";
 
         // When
-        Executable testedBuildAction = builder::build;
+        final Executable testedAction = () -> Universe.builder().withName(emptyName);
 
         // Then
-        assertThrows(EmptyUniverseNameException.class, testedBuildAction);
+        assertThrows(EmptyUniverseNameException.class, testedAction);
     }
 }
