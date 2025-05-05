@@ -1,8 +1,8 @@
-package behetre.dylan.lore.crafter.universe.domain.universe.name;
+package behetre.dylan.lore.crafter.universe.domain.name;
 
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.EmptyUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -29,8 +29,8 @@ class UniverseNameTest {
         Executable testedAction = () -> new UniverseName(null);
 
         // assert
-        final NullUniverseNameException thrownException = assertThrowsExactly(
-                NullUniverseNameException.class,
+        final NoUniverseNameException thrownException = assertThrowsExactly(
+                NoUniverseNameException.class,
                 testedAction
         );
 

@@ -1,11 +1,12 @@
 package behetre.dylan.lore.crafter.universe.spi;
 
-import behetre.dylan.lore.crafter.universe.domain.universe.Universe;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.Universe;
+import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
 
 public interface UniverseRepository {
 
-    Universe create(Universe universe);
+    Universe create(CreateUniverseCommand createUniverseCommand) throws UniverseCreationException;
 
     boolean contains(UniverseName universeName);
 }

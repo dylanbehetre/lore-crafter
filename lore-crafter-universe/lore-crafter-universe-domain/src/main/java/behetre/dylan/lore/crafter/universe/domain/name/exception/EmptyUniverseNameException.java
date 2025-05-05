@@ -1,4 +1,4 @@
-package behetre.dylan.lore.crafter.universe.domain.universe.name.exception;
+package behetre.dylan.lore.crafter.universe.domain.name.exception;
 
 public final class EmptyUniverseNameException extends UniverseNameException{
     public EmptyUniverseNameException() {

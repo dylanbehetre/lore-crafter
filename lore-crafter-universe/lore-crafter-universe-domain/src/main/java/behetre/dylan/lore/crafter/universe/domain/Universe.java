@@ -1,11 +1,9 @@
-package behetre.dylan.lore.crafter.universe.domain.universe;
+package behetre.dylan.lore.crafter.universe.domain;
 
-import behetre.dylan.lore.crafter.universe.domain.universe.description.UniverseDescription;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.UniverseName;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.UniverseNameException;
-
-import java.util.Objects;
+import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescription;
+import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 
 /**
  * Definition of a universe
@@ -19,11 +17,11 @@ public final class Universe {
     /**
      * @param name        name of the universe. Act as a functional identifier and must be unique
      * @param description universe's description
-     * @throws NullUniverseNameException if the name is null
+     * @throws NoUniverseNameException if the name is null
      */
-    private Universe(UniverseName name, UniverseDescription description) throws NullUniverseNameException {
+    private Universe(UniverseName name, UniverseDescription description) throws NoUniverseNameException {
         if (name == null) {
-            throw new NullUniverseNameException();
+            throw new NoUniverseNameException();
         }
         this.name = name;
         this.description = description;
@@ -46,28 +44,6 @@ public final class Universe {
     public UniverseDescription description() {
         return description;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Universe) obj;
-        return Objects.equals(this.name, that.name) &&
-                Objects.equals(this.description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Universe[" +
-                "name=" + name + ", " +
-                "description=" + description + ']';
-    }
-
 
     /**
      * Builder class for Universe
@@ -92,6 +68,17 @@ public final class Universe {
         }
 
         /**
+         * Sets the name of the universe
+         *
+         * @param name the name of the universe. Cannot be null.
+         * @return this builder for method chaining
+         */
+        public UniverseBuilder withName(UniverseName name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
          * Sets the description of the universe
          *
          * @param description the description of the universe
@@ -103,11 +90,22 @@ public final class Universe {
         }
 
         /**
+         * Sets the description of the universe
+         *
+         * @param description the description of the universe
+         * @return this builder for method chaining
+         */
+        public UniverseBuilder withDescription(UniverseDescription description) {
+            this.description = description;
+            return this;
+        }
+
+        /**
          * Builds a new Universe instance with the provided values
          *
          * @return a new Universe instance
          */
-        public Universe build() throws NullUniverseNameException {
+        public Universe build() throws NoUniverseNameException {
             return new Universe(name, description);
         }
     }

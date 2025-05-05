@@ -1,7 +1,7 @@
-package behetre.dylan.lore.crafter.universe.domain.universe.name;
+package behetre.dylan.lore.crafter.universe.domain.name;
 
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.EmptyUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.universe.name.exception.NullUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
 
 import java.util.Objects;
 
@@ -10,16 +10,16 @@ public final class UniverseName {
 
     /// Constructor
     /// @param name universe's name. Cannot be null or empty.
-    /// @throws NullUniverseNameException if the name is null
+    /// @throws NoUniverseNameException if the name is null
     /// @throws EmptyUniverseNameException if the name is empty
-    public UniverseName(String name) throws NullUniverseNameException, EmptyUniverseNameException {
+    public UniverseName(String name) throws NoUniverseNameException, EmptyUniverseNameException {
         checkValidity(name);
         this.name = name;
     }
 
-    private static void checkValidity(String name) throws NullUniverseNameException, EmptyUniverseNameException {
+    private static void checkValidity(String name) throws NoUniverseNameException, EmptyUniverseNameException {
         if (name == null) {
-            throw new NullUniverseNameException();
+            throw new NoUniverseNameException();
         } else if (name.isBlank()) {
             throw new EmptyUniverseNameException();
         }
@@ -27,17 +27,14 @@ public final class UniverseName {
 
     @Override
     public String toString() {
-        return name;
-    }
-
-    public String name() {
-        return name;
+        return this.name;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
+
         var that = (UniverseName) obj;
         return Objects.equals(this.name, that.name);
     }
