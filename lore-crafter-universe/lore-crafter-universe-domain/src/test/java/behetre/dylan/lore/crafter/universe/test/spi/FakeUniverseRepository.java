@@ -2,7 +2,6 @@ package behetre.dylan.lore.crafter.universe.test.spi;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
 import behetre.dylan.lore.crafter.universe.spi.UniverseCreationException;
 import behetre.dylan.lore.crafter.universe.spi.UniverseRepository;
@@ -45,8 +44,9 @@ public class FakeUniverseRepository implements UniverseRepository {
         return this.universeByName.size();
     }
 
-    private static Universe toUniverse(CreateUniverseCommand createUniverseCommand) throws NoUniverseNameException {
+    private Universe toUniverse(CreateUniverseCommand createUniverseCommand) throws Exception {
         return Universe.builder()
+                       .withIdentifier(this.getUniverseCount() + 1L)
                 .withName(createUniverseCommand.name())
                 .withDescription(createUniverseCommand.description())
                 .build();

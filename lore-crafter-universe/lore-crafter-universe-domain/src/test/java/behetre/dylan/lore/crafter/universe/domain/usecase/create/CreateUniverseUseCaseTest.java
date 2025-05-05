@@ -1,7 +1,7 @@
 package behetre.dylan.lore.crafter.universe.domain.usecase.create;
 
-import behetre.dylan.lore.crafter.universe.domain.AlreadyExistsUniverseException;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
+import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import behetre.dylan.lore.crafter.universe.test.spi.FakeUniverseRepository;
 import org.junit.jupiter.api.Assertions;
@@ -14,8 +14,9 @@ class CreateUniverseUseCaseTest {
 
     final Universe validUniverse;
 
-    CreateUniverseUseCaseTest() throws UniverseNameException {
+    CreateUniverseUseCaseTest() throws UniverseNameException, NoUniverseIdentifierException {
         this.validUniverse = Universe.builder()
+                                     .withIdentifier(1L)
                 .withName("Witchcraft's World")
                 .withDescription("A fantastic universe containing witches and wizards.")
                 .build();

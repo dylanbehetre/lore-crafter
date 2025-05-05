@@ -1,6 +1,5 @@
 package behetre.dylan.lore.crafter.universe.domain.usecase.create;
 
-import behetre.dylan.lore.crafter.universe.domain.AlreadyExistsUniverseException;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.spi.UniverseCreationException;

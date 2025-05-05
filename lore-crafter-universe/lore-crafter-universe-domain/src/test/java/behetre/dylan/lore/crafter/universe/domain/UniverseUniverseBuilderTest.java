@@ -1,6 +1,8 @@
 package behetre.dylan.lore.crafter.universe.domain;
 
 import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescription;
+import behetre.dylan.lore.crafter.universe.domain.identifier.UniverseIdentifier;
+import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
@@ -13,33 +15,65 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UniverseUniverseBuilderTest {
 
+    final Long validId = 1L;
+    final String validName = "Test Universe";
+    final String validDescription = "This is a test universe";
+
     @Test
-    void givenNameAndDescription_whenBuildUniverse_thenUniverseIsCreated() throws UniverseNameException {
+    void givenAllFields_whenBuildUniverse_thenUniverseIsCreated() throws Exception {
         // Given
-        String name = "Test Universe";
-        String description = "This is a test universe";
 
         // When
-        Universe universe = Universe.builder()
-                .withName(name)
-                .withDescription(description)
-                .build();
+        final Universe universe = Universe.builder()
+                                          .withIdentifier(validId)
+                                          .withName(validName)
+                                          .withDescription(validDescription)
+                                          .build();
 
         // Then
-        assertEquals(new UniverseName(name), universe.name());
-        assertEquals(new UniverseDescription(description), universe.description());
+        assertEquals(new UniverseIdentifier(validId), universe.id());
+        assertEquals(new UniverseName(validName), universe.name());
+        assertEquals(new UniverseDescription(validDescription), universe.description());
     }
 
     @Test
-    void givenNullName_whenBuildUniverse_thenThrowNullUniverseNameException() {
+    void givenNoName_whenBuildUniverse_thenThrowNoUniverseNameException() {
         // Given
-        final Universe.UniverseBuilder builder = Universe.builder();
+        final Universe.UniverseBuilder builder = Universe.builder()
+                                                         .withIdentifier(this.validId);
 
         // When
-        Executable testedBuildAction = builder::build;
+        final Executable testedBuildAction = builder::build;
 
         // Then
         assertThrows(NoUniverseNameException.class, testedBuildAction);
+    }
+
+    @Test
+    void givenNullName_whenBuildUniverse_thenThrowNoUniverseNameException() {
+        // Given
+        final Universe.UniverseBuilder builder = Universe.builder()
+                                                         .withIdentifier(this.validId)
+                                                         .withName((UniverseName) null);
+
+        // When
+        final Executable testedBuildAction = builder::build;
+
+        // Then
+        assertThrows(NoUniverseNameException.class, testedBuildAction);
+    }
+
+    @Test
+    void givenNoIdentifier_whenBuildUniverse_thenThrowNoUniverseIdentifierException() throws UniverseNameException {
+        // Given
+        final Universe.UniverseBuilder builder = Universe.builder()
+                                                         .withName(this.validName);
+
+        // When
+        final Executable testedBuildAction = builder::build;
+
+        // Then
+        assertThrows(NoUniverseIdentifierException.class, testedBuildAction);
     }
 
     @Test

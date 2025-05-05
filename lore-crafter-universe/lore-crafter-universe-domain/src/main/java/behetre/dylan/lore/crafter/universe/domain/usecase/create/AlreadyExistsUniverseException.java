@@ -1,4 +1,4 @@
-package behetre.dylan.lore.crafter.universe.domain;
+package behetre.dylan.lore.crafter.universe.domain.usecase.create;
 
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 
