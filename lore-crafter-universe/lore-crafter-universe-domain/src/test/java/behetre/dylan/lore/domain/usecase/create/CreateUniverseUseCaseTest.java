@@ -1,9 +1,12 @@
-package behetre.dylan.lore.crafter.universe.domain.usecase.create;
+package behetre.dylan.lore.domain.usecase.create;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
-import behetre.dylan.lore.crafter.universe.test.spi.FakeUniverseRepository;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.AlreadyExistsUniverseException;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseUseCase;
+import behetre.dylan.lore.test.spi.FakeUniverseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

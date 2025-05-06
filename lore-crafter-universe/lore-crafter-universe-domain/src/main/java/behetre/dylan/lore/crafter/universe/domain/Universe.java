@@ -7,10 +7,6 @@ import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 
-/**
- * Definition of a universe
- */
-
 public final class Universe {
 
     private final UniverseIdentifier id;
@@ -35,14 +31,7 @@ public final class Universe {
         this.description = description;
     }
 
-    /**
-     * Creates a new builder for Universe
-     *
-     * @return a new Universe builder
-     */
-    public static UniverseBuilder builder() {
-        return new UniverseBuilder();
-    }
+    /* Getters */
 
     public UniverseIdentifier id() {
         return id;
@@ -56,6 +45,18 @@ public final class Universe {
         return description;
     }
 
+    /* Exposed static methods */
+
+    /**
+     * Creates a new builder for Universe
+     *
+     * @return a new Universe builder
+     */
+    public static UniverseBuilder builder() {
+        return new UniverseBuilder();
+    }
+
+    /* Inner static methods */
     private static void assertIdValidity(UniverseIdentifier id) throws NoUniverseIdentifierException {
         if (id == null) {
             throw new NoUniverseIdentifierException();

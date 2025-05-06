@@ -7,7 +7,6 @@ import behetre.dylan.lore.crafter.universe.spi.UniverseRepository;
 
 public class CreateUniverseUseCase {
 
-
     private final UniverseRepository universeRepository;
 
     public CreateUniverseUseCase(UniverseRepository universeRepository) {

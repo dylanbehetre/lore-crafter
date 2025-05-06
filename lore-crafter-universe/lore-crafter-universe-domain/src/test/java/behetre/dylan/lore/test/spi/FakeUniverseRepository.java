@@ -1,4 +1,4 @@
-package behetre.dylan.lore.crafter.universe.test.spi;
+package behetre.dylan.lore.test.spi;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;

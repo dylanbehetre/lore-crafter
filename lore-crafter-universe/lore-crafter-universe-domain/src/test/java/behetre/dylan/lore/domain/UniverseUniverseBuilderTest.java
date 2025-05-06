@@ -1,5 +1,6 @@
-package behetre.dylan.lore.crafter.universe.domain;
+package behetre.dylan.lore.domain;
 
+import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescription;
 import behetre.dylan.lore.crafter.universe.domain.identifier.UniverseIdentifier;
 import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
