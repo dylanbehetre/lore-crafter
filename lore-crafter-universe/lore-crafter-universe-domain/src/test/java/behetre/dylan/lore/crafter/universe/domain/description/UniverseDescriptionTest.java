@@ -13,8 +13,6 @@ class UniverseDescriptionTest {
         final UniverseDescription universeDescription = new UniverseDescription(description);
 
         assertEquals(description, universeDescription.toString());
-
-
     }
 
 }

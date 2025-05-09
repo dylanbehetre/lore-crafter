@@ -9,8 +9,9 @@ public final class UniverseName {
     private final String name;
 
     /// Constructor
+    ///
     /// @param name universe's name. Cannot be null or empty.
-    /// @throws NoUniverseNameException if the name is null
+    /// @throws NoUniverseNameException    if the name is null
     /// @throws EmptyUniverseNameException if the name is empty
     public UniverseName(String name) throws NoUniverseNameException, EmptyUniverseNameException {
         checkValidity(name);

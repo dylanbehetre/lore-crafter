@@ -1,12 +1,9 @@
-package behetre.dylan.lore.domain.usecase.create;
+package behetre.dylan.lore.crafter.universe.domain.usecase.create;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.usecase.create.AlreadyExistsUniverseException;
-import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
-import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseUseCase;
-import behetre.dylan.lore.test.spi.FakeUniverseRepository;
+import behetre.dylan.lore.crafter.universe.spi.FakeUniverseRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,16 +17,19 @@ class CreateUniverseUseCaseTest {
     CreateUniverseUseCaseTest() throws UniverseNameException, NoUniverseIdentifierException {
         this.validUniverse = Universe.builder()
                                      .withIdentifier(1L)
-                .withName("Witchcraft's World")
-                .withDescription("A fantastic universe containing witches and wizards.")
-                .build();
+                                     .withName("Witchcraft's World")
+                                     .withDescription("A fantastic universe containing witches and wizards.")
+                                     .build();
     }
 
     @Test
     void givenConformCreateUniverseCommand_whenCreate_thenUniverseCreated() throws Exception {
         // arrange
         final Universe validUniverseToCreate = this.validUniverse;
-        final CreateUniverseCommand createUniverseCommand = new CreateUniverseCommand(validUniverseToCreate.name(), validUniverseToCreate.description());
+        final CreateUniverseCommand createUniverseCommand = new CreateUniverseCommand(
+                validUniverseToCreate.name(),
+                validUniverseToCreate.description()
+        );
 
         final FakeUniverseRepository universeRepository = new FakeUniverseRepository();
         final int initialRepositorySize = universeRepository.getUniverseCount();
@@ -41,6 +41,7 @@ class CreateUniverseUseCaseTest {
 
         // assert
         Assertions.assertAll("Service must return the created universe",
+                () -> Assertions.assertNotNull(createdUniverse.id()),
                 () -> Assertions.assertEquals(validUniverseToCreate.name(), createdUniverse.name()),
                 () -> Assertions.assertEquals(validUniverseToCreate.description(), createdUniverse.description())
         );

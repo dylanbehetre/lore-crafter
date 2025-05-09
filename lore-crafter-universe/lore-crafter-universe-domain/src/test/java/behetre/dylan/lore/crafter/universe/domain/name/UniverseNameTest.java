@@ -1,6 +1,5 @@
-package behetre.dylan.lore.domain.name;
+package behetre.dylan.lore.crafter.universe.domain.name;
 
-import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
@@ -25,7 +24,7 @@ class UniverseNameTest {
     }
 
     @Test
-    void givenNullName_whenCreateIt_thenThrowNullUniverseNameException() {
+    void givenNullName_whenCreateIt_thenThrowNoUniverseNameException() {
         // act
         Executable testedAction = () -> new UniverseName(null);
 
@@ -39,7 +38,7 @@ class UniverseNameTest {
     }
 
     @Test
-    void givenEmptyName_whenCreateIt_thenThrowEmptyUniverseNameException() {
+    void givenEmptyNameValue_whenCreateIt_thenThrowEmptyUniverseNameException() {
         // arrange
         final String emptyName = "";
 
