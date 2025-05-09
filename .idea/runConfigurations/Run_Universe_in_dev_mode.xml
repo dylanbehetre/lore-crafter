@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Universe in dev mode" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <module name="lore-crafter-universe-spring-api" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="behetre.dylan.lore.crafter.universe.LoreCrafterUniverseApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
