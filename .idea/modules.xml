@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/lore-crafter.iml" filepath="$PROJECT_DIR$/.idea/lore-crafter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lore-crafter-universe-spring-spi-jpa.iml" filepath="$PROJECT_DIR$/lore-crafter-universe-spring-spi-jpa.iml" />
     </modules>
   </component>
 </project>
