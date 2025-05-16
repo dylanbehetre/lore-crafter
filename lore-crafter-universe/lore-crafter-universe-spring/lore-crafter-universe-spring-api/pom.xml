@@ -18,7 +18,6 @@
 
         <!-- Dependencies version-->
         <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
-        <universe-spi-spring-jpa-version>1.0.0-SNAPSHOT</universe-spi-spring-jpa-version>
         <swagger-annotations-version>2.2.30</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
 
