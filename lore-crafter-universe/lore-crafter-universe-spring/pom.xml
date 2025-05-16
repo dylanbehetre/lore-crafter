@@ -20,6 +20,14 @@
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dependencies version-->
+        <universe-database-liquibase.version>1.0.0-SNAPSHOT</universe-database-liquibase.version>
+        <universe-domain.version>1.0.0-SNAPSHOT</universe-domain.version>
+        <universe-openapi.version>1.0.0-SNAPSHOT</universe-openapi.version>
+        <universe-spring-api.version>1.0.0-SNAPSHOT</universe-spring-api.version>
+        <universe-spring-spi-jpa.version>1.0.0-SNAPSHOT</universe-spring-spi-jpa.version>
+        <universe-spring-spi-jpa-test.version>1.0.0-SNAPSHOT</universe-spring-spi-jpa-test.version>
     </properties>
 
     <modules>
@@ -28,6 +36,51 @@
         <module>lore-crafter-universe-spring-api</module>
         <module>lore-crafter-universe-spring-application</module>
     </modules>
+
+    <dependencyManagement>
+        <!-- Spring application submodules version management-->
+        <dependencies>
+            <!-- Domain dependencies -->
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-domain</artifactId>
+                <version>${universe-domain.version}</version>
+            </dependency>
+
+            <!-- API dependencies -->
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-spring-api</artifactId>
+                <version>${universe-spring-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-openapi</artifactId>
+                <version>${universe-openapi.version}</version>
+            </dependency>
+
+            <!-- SPI dependencies -->
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-spring-spi-jpa</artifactId>
+                <version>${universe-spring-spi-jpa.version}</version>
+            </dependency>
+            <!-- Liquibase resources dependency -->
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-database-liquibase</artifactId>
+                <version>${universe-database-liquibase.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>behetre.dylan</groupId>
+                <artifactId>lore-crafter-universe-spring-spi-jpa-test</artifactId>
+                <version>${universe-spring-spi-jpa-test.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Tests dependencies -->

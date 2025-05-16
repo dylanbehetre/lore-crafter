@@ -20,11 +20,6 @@
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Dependencies version-->
-        <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
-        <universe-database-liquibase-version>1.0.0-SNAPSHOT</universe-database-liquibase-version>
-        <universe-spring-spi-jpa-test-version>1.0.0-SNAPSHOT</universe-spring-spi-jpa-test-version>
-
         <!-- Plugins dependencies version-->
         <maven-dependency-plugin-version>3.8.1</maven-dependency-plugin-version>
     </properties>
@@ -34,14 +29,12 @@
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-domain</artifactId>
-            <version>${universe-domain-version}</version>
         </dependency>
 
         <!-- Liquibase resources dependency -->
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-database-liquibase</artifactId>
-            <version>${universe-database-liquibase-version}</version>
         </dependency>
 
         <!-- Spring dependencies -->
@@ -67,7 +60,6 @@
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-spring-spi-jpa-test</artifactId>
-            <version>${universe-spring-spi-jpa-test-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

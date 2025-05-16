@@ -17,8 +17,6 @@
         <java.version>24</java.version>
 
         <!-- Dependencies version-->
-        <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
-        <universe-openapi-version>1.0.0-SNAPSHOT</universe-openapi-version>
         <swagger-annotations-version>2.2.30</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
 
@@ -32,14 +30,12 @@
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-domain</artifactId>
-            <version>${universe-domain-version}</version>
         </dependency>
 
         <!-- API specifications -->
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-openapi</artifactId>
-            <version>${universe-openapi-version}</version>
         </dependency>
 
         <!-- Spring dependencies -->

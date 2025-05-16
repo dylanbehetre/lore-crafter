@@ -17,9 +17,6 @@
         <java.version>24</java.version>
 
         <!-- Dependencies version-->
-        <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
-        <universe-spring-spi-jpa-version>1.0.0-SNAPSHOT</universe-spring-spi-jpa-version>
-        <universe-spring-api-version>1.0.0-SNAPSHOT</universe-spring-api-version>
         <swagger-annotations-version>2.2.30</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
 
@@ -33,21 +30,18 @@
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-domain</artifactId>
-            <version>${universe-domain-version}</version>
         </dependency>
 
         <!-- SPI dependencies -->
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-spring-spi-jpa</artifactId>
-            <version>${universe-spring-spi-jpa-version}</version>
         </dependency>
 
         <!-- API dependencies -->
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-spring-api</artifactId>
-            <version>${universe-spring-api-version}</version>
         </dependency>
 
         <!-- Actuator API -->
@@ -60,7 +54,6 @@
         <dependency>
             <groupId>behetre.dylan</groupId>
             <artifactId>lore-crafter-universe-spring-spi-jpa-test</artifactId>
-            <version>${universe-spring-spi-jpa-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
