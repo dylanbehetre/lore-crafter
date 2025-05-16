@@ -5,23 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>behetre.dylan</groupId>
-    <artifactId>lore-crafter-universe</artifactId>
+    <artifactId>lore-crafter-universe-openapi</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <description>Service used to manage universe</description>
+    <description>Contains Universes domain objects</description>
 
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <modules>
-        <module>lore-crafter-universe-domain</module>
-        <module>lore-crafter-universe-openapi</module>
-        <module>lore-crafter-universe-spring</module>
-        <module>lore-crafter-universe-database-liquibase</module>
-    </modules>
-
 
 </project>

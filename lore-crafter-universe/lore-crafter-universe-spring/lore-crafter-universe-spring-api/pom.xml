@@ -18,6 +18,7 @@
 
         <!-- Dependencies version-->
         <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
+        <universe-openapi-version>1.0.0-SNAPSHOT</universe-openapi-version>
         <swagger-annotations-version>2.2.30</swagger-annotations-version>
         <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
 
@@ -34,8 +35,15 @@
             <version>${universe-domain-version}</version>
         </dependency>
 
+        <!-- API specifications -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-openapi</artifactId>
+            <version>${universe-openapi-version}</version>
+        </dependency>
+
         <!-- Spring dependencies -->
-        <!-- API -->
+        <!--    API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -83,8 +91,8 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>behetre.dylan</groupId>
-                                    <artifactId>lore-crafter-universe-domain</artifactId>
-                                    <version>${universe-domain-version}</version>
+                                    <artifactId>lore-crafter-universe-openapi</artifactId>
+                                    <version>${universe-openapi-version}</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/openapi</outputDirectory>

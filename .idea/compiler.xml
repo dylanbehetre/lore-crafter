@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="lore-crafter-universe-spring-api" />
         <module name="lore-crafter-universe-spring-spi-jpa-test" />
+        <module name="lore-crafter-universe-openapi" />
+        <module name="lore-crafter-universe-spring-api" />
         <module name="lore-crafter-universe-spring-application" />
         <module name="lore-crafter-universe-domain" />
         <module name="lore-crafter-universe-database-liquibase" />
