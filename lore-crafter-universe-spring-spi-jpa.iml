@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="lore-crafter-universe-spring-spi-jpa" value="a4542199-23ec-497f-be74-219ce05e8449" />
+          <factory-entry name="lore-crafter-universe-spring-spi-jpa" value="1e638c05-053c-452b-8dfa-73ef38b52d0e" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

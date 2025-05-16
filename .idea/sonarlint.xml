@@ -4,6 +4,7 @@
     <option name="moduleMapping">
       <map>
         <entry key="lore-crafter-universe-spring-api" value="lore-crafter-universe-api-spring" />
+        <entry key="lore-crafter-universe-spring-application" value="lore-crafter-universe-spring-api (1)" />
         <entry key="lore-crafter-universe-spring-spi-jpa" value="lore-crafter-universe-spi-spring-jpa" />
       </map>
     </option>

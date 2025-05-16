@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: universe/db.changelog-universe.yaml
+      relativeToChangelogFile: true

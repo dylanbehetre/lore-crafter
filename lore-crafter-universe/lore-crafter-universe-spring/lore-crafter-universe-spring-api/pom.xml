@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>behetre.dylan</groupId>
+        <artifactId>lore-crafter-universe-spring</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lore-crafter-universe-spring-api</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>lore-crafter-universe-spring-api</name>
+    <description>Spring implementation of lore-crafter-universe-domain API</description>
+
+    <properties>
+        <java.version>24</java.version>
+
+        <!-- Dependencies version-->
+        <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
+        <universe-spi-spring-jpa-version>1.0.0-SNAPSHOT</universe-spi-spring-jpa-version>
+        <swagger-annotations-version>2.2.30</swagger-annotations-version>
+        <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
+
+        <!-- Plugins version -->
+        <openapi-generator-maven-plugin-version>7.12.0</openapi-generator-maven-plugin-version>
+        <maven-dependency-plugin-version>3.8.1</maven-dependency-plugin-version>
+    </properties>
+
+    <dependencies>
+        <!-- Domain dependencies -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-domain</artifactId>
+            <version>${universe-domain-version}</version>
+        </dependency>
+
+        <!-- Spring dependencies -->
+        <!-- API -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Generated code dependencies -->
+        <!-- Jackson serialization/deserialization dependency-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+        <!-- Validation dependency -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+        <!-- Swagger Annotations dependencies -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin used to extract a resource from another dependency: the openapi.json -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-openapi-spec</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>behetre.dylan</groupId>
+                                    <artifactId>lore-crafter-universe-domain</artifactId>
+                                    <version>${universe-domain-version}</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}/openapi</outputDirectory>
+                                    <includes>openapi.json</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- OpenAPI code generator plugin-->
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-domain-models</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Open API Specification path -->
+                            <inputSpec>${project.build.directory}/openapi/openapi.json</inputSpec>
+
+                            <!-- Generated sources directory path -->
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+
+                            <!-- Used the Spring dedicated OpenAPI generator -->
+                            <generatorName>spring</generatorName>
+
+                            <!-- packages to use -->
+                            <apiPackage>behetre.dylan.lore.crafter.universe.api</apiPackage>
+                            <modelPackage>behetre.dylan.lore.crafter.universe.api.model</modelPackage>
+
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <!-- Spring Boot 3+ (use jakarta.* in replacement to javax.*) -->
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <!-- Generate builders for models -->
+                                <generateBuilders>true</generateBuilders>
+                                <dateLibrary>java8</dateLibrary>
+                                <!-- Publish the original OAS (no generation from controllers)-->
+                                <documentationProvider>source</documentationProvider>
+                                <!-- All generated methods can throw some Exception-->
+                                <unhandledException>true</unhandledException>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

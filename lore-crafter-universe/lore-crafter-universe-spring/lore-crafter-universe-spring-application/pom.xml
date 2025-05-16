@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>behetre.dylan</groupId>
+        <artifactId>lore-crafter-universe-spring</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lore-crafter-universe-spring-application</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>lore-crafter-universe-spring-application</name>
+    <description>Spring implementation of lore crafter universe application</description>
+
+    <properties>
+        <java.version>24</java.version>
+
+        <!-- Dependencies version-->
+        <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
+        <universe-spring-spi-jpa-version>1.0.0-SNAPSHOT</universe-spring-spi-jpa-version>
+        <universe-spring-api-version>1.0.0-SNAPSHOT</universe-spring-api-version>
+        <swagger-annotations-version>2.2.30</swagger-annotations-version>
+        <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
+
+        <!-- Plugins version -->
+        <openapi-generator-maven-plugin-version>7.12.0</openapi-generator-maven-plugin-version>
+        <maven-dependency-plugin-version>3.8.1</maven-dependency-plugin-version>
+    </properties>
+
+    <dependencies>
+        <!-- Domain dependencies -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-domain</artifactId>
+            <version>${universe-domain-version}</version>
+        </dependency>
+
+        <!-- SPI dependencies -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-spring-spi-jpa</artifactId>
+            <version>${universe-spring-spi-jpa-version}</version>
+        </dependency>
+
+        <!-- API dependencies -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-spring-api</artifactId>
+            <version>${universe-spring-api-version}</version>
+        </dependency>
+
+        <!-- Actuator API -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

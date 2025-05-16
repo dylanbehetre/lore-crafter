@@ -1,0 +1,21 @@
+debug: false
+logging:
+  level:
+    org:
+      springframework: INFO
+spring:
+  jpa:
+    # Best practice: it permits checking generated SQL requests
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/universe
+    username: universe_dev_admin
+    password: dev_admin
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      # Add initial data from data-dev.sql to facilitate local development
+      mode: always

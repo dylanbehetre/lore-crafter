@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: lore-crafter-universe
+  jpa:
+    # Best practice: it permits avoiding database access after the end of the transaction
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # Best practice: to avoid problems by managing update explicitly
+      ddl-auto: none
+  datasource:
+    # Best practice: specify sensitive information as environment variables
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${UNIVERSE_DB_NAME}
+    username: ${UNIVERSE_DATABASE_USERNAME}
+    password: ${UNIVERSE_DATABASE_PASSWORD}
+  sql:
+    init:
+      # Best practice to not inject data into the production database at the application start
+      mode: never
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-root.yaml
+    enabled: true

@@ -7,7 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lore-crafter-universe-spring-api" />
+        <module name="lore-crafter-universe-spring-application" />
         <module name="lore-crafter-universe-domain" />
+        <module name="lore-crafter-universe-database-liquibase" />
         <module name="lore-crafter-universe-spring-spi-jpa" />
       </profile>
     </annotationProcessing>
@@ -16,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="lore-crafter-universe-spring" options="" />
       <module name="lore-crafter-universe-spring-api" options="-parameters" />
+      <module name="lore-crafter-universe-spring-application" options="-parameters" />
       <module name="lore-crafter-universe-spring-spi-jpa" options="-parameters" />
     </option>
   </component>

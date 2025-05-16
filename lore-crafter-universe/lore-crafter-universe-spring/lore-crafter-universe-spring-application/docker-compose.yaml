@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  # See related values in behetre.dylan.lore.crafter.universe.spi.configuration.Postgre
+  postgres:
+    image: postgres:14.17
+    container_name: universe_db
+    environment:
+      POSTGRES_DB: universe
+      POSTGRES_USER: universe_dev_admin
+      POSTGRES_PASSWORD: dev_admin
+    ports:
+      - "5432:5432"
