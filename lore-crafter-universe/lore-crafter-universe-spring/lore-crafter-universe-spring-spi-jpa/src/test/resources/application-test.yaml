@@ -5,11 +5,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/universe
-    username: universe_admin
-    password: dev_admin
-    driver-class-name: org.postgresql.Driver
   sql:
     init:
       mode: never

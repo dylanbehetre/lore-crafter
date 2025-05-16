@@ -23,6 +23,7 @@
         <!-- Dependencies version-->
         <universe-domain-version>1.0.0-SNAPSHOT</universe-domain-version>
         <universe-database-liquibase-version>1.0.0-SNAPSHOT</universe-database-liquibase-version>
+        <universe-spring-spi-jpa-test-version>1.0.0-SNAPSHOT</universe-spring-spi-jpa-test-version>
 
         <!-- Plugins dependencies version-->
         <maven-dependency-plugin-version>3.8.1</maven-dependency-plugin-version>
@@ -64,48 +65,11 @@
 
         <!-- Test dependencies -->
         <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-spring-spi-jpa-test</artifactId>
+            <version>${universe-spring-spi-jpa-test-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Plugin used to extract liquibase changelogs -->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-dependency-plugin</artifactId>-->
-            <!--                <version>${maven-dependency-plugin-version}</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>copy-openapi-spec</id>-->
-            <!--                        <phase>generate-sources</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>unpack</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <artifactItems>-->
-            <!--                                <artifactItem>-->
-            <!--                                    <groupId>behetre.dylan</groupId>-->
-            <!--                                    <artifactId>lore-crafter-universe-database-liquibase</artifactId>-->
-            <!--                                    <version>${universe-database-liquibase-version}</version>-->
-            <!--                                    <type>jar</type>-->
-            <!--                                    <overWrite>false</overWrite>-->
-            <!--                                    <outputDirectory>${project.build.directory}/openapi</outputDirectory>-->
-            <!--                                    <includes>openapi.json</includes>-->
-            <!--                                </artifactItem>-->
-            <!--                            </artifactItems>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-        </plugins>
-    </build>
 
 </project>

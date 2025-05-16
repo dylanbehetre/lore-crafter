@@ -23,6 +23,7 @@
     </properties>
 
     <modules>
+        <module>lore-crafter-universe-spring-spi-jpa-test</module>
         <module>lore-crafter-universe-spring-spi-jpa</module>
         <module>lore-crafter-universe-spring-api</module>
         <module>lore-crafter-universe-spring-application</module>

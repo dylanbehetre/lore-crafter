@@ -5,6 +5,7 @@ import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescriptio
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
+import behetre.dylan.lore.crafter.universe.spi.container.DatabaseContainer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class UniverseJpaRepositoryTest {
 
-    private static final DatabaseContainer DATABASE_CONTAINER = new DatabaseContainer();
+    private static final DatabaseContainer DATABASE_CONTAINER = DatabaseContainer.ofPostgreSQL();
 
     private final UniverseJpaRepository testedRepository;
 
@@ -30,8 +31,8 @@ class UniverseJpaRepositoryTest {
     }
 
     @AfterAll
-    static void afterAllTests() {
-        DATABASE_CONTAINER.stop();
+    static void afterAllTests() throws Exception {
+        DATABASE_CONTAINER.close();
     }
 
     @Test

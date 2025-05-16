@@ -55,6 +55,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>behetre.dylan</groupId>
+            <artifactId>lore-crafter-universe-spring-spi-jpa-test</artifactId>
+            <version>${universe-spring-spi-jpa-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
