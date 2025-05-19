@@ -3,7 +3,7 @@ package behetre.dylan.lore.crafter.universe.spi;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescription;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.InvalidUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
 import behetre.dylan.lore.crafter.universe.spi.container.DatabaseContainer;
 import org.assertj.core.api.Assertions;
@@ -38,7 +38,7 @@ class UniverseJpaRepositoryTest {
 
     @Test
     @Transactional
-    void givenNoUniverse_whenCreateOne_thenItIsCreated() throws UniverseNameException, UniverseCreationException {
+    void givenNoUniverse_whenCreateOne_thenItIsCreated() throws InvalidUniverseNameException, UniverseCreationException {
         // arrange
         final UniverseName expectedUniverseName = new UniverseName("Some Universe name");
         final UniverseDescription expectedUniverseDescription = new UniverseDescription("Some Universe description");
@@ -59,7 +59,7 @@ class UniverseJpaRepositoryTest {
 
     @Test
     @Transactional
-    void givenOneUniverse_whenCreateAnotherWithSameName_thenItIsCreated() throws UniverseNameException, UniverseCreationException {
+    void givenOneUniverse_whenCreateAnotherWithSameName_thenItIsCreated() throws InvalidUniverseNameException, UniverseCreationException {
         // arrange
         final Universe alreadyExistingUniverse = testedRepository.create(
                 new CreateUniverseCommand(

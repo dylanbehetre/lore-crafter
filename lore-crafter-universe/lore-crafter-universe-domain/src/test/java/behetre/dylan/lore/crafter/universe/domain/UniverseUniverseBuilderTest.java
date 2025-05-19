@@ -6,7 +6,6 @@ import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUnivers
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -20,7 +19,7 @@ class UniverseUniverseBuilderTest {
     final String validDescription = "This is a test universe";
 
     @Test
-    void givenAllFields_whenBuildUniverse_thenUniverseIsCreated() throws Exception {
+    void givenAllFields_whenBuildUniverse_thenUniverseIsCreated() {
         // Given
 
         // When
@@ -64,7 +63,19 @@ class UniverseUniverseBuilderTest {
     }
 
     @Test
-    void givenNoIdentifier_whenBuildUniverse_thenThrowNoUniverseIdentifierException() throws UniverseNameException {
+    void givenEmptyName_whenBuildUniverse_thenThrowEmptyUniverseNameException() {
+        // Given
+        final String emptyName = "";
+
+        // When
+        final Executable testedAction = () -> Universe.builder().withName(emptyName);
+
+        // Then
+        assertThrows(EmptyUniverseNameException.class, testedAction);
+    }
+
+    @Test
+    void givenNoIdentifier_whenBuildUniverse_thenThrowNoUniverseIdentifierException() {
         // Given
         final Universe.UniverseBuilder builder = Universe.builder()
                                                          .withName(this.validName);
@@ -77,14 +88,14 @@ class UniverseUniverseBuilderTest {
     }
 
     @Test
-    void givenEmptyName_whenBuildUniverse_thenThrowEmptyUniverseNameException() {
+    void givenNullIdentifier_whenBuildUniverse_thenThrowDedicatedException() {
         // Given
-        final String emptyName = "";
+        final Universe.UniverseBuilder builder = Universe.builder();
 
         // When
-        final Executable testedAction = () -> Universe.builder().withName(emptyName);
+        final Executable testedBuildAction = () -> builder.withIdentifier(null);
 
         // Then
-        assertThrows(EmptyUniverseNameException.class, testedAction);
+        assertThrows(NoUniverseIdentifierException.class, testedBuildAction);
     }
 }

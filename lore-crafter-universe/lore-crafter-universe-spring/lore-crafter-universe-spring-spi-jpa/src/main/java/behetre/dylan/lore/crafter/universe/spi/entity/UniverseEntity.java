@@ -1,8 +1,7 @@
 package behetre.dylan.lore.crafter.universe.spi.entity;
 
+import behetre.dylan.lore.crafter.universe.domain.InvalidUniversePropertyException;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
-import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +37,7 @@ public class UniverseEntity {
         this.description = description;
     }
 
-    public Universe toUniverse() throws UniverseNameException, NoUniverseIdentifierException {
+    public Universe toUniverse() throws InvalidUniversePropertyException {
         return Universe.builder()
                        .withIdentifier(this.id)
                        .withName(this.name)

@@ -2,20 +2,17 @@ package behetre.dylan.lore.crafter.universe.domain.name;
 
 import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import java.util.Objects;
-
-public final class UniverseName {
-    private final String name;
-
+public record UniverseName(@NotNull @NotEmpty String name) {
     /// Constructor
     ///
     /// @param name universe's name. Cannot be null or empty.
     /// @throws NoUniverseNameException    if the name is null
     /// @throws EmptyUniverseNameException if the name is empty
-    public UniverseName(String name) throws NoUniverseNameException, EmptyUniverseNameException {
+    public UniverseName {
         checkValidity(name);
-        this.name = name;
     }
 
     private static void checkValidity(String name) throws NoUniverseNameException, EmptyUniverseNameException {
@@ -27,22 +24,8 @@ public final class UniverseName {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return this.name;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-
-        var that = (UniverseName) obj;
-        return Objects.equals(this.name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
     }
 
 }

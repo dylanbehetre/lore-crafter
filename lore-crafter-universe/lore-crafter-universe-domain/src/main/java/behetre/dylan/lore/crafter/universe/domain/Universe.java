@@ -4,8 +4,8 @@ import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescriptio
 import behetre.dylan.lore.crafter.universe.domain.identifier.UniverseIdentifier;
 import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
+import behetre.dylan.lore.crafter.universe.domain.name.exception.InvalidUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 
 public final class Universe {
 
@@ -93,7 +93,7 @@ public final class Universe {
          * @param name the name of the universe. Cannot be null or empty.
          * @return this builder for method chaining
          */
-        public UniverseBuilder withName(String name) throws UniverseNameException {
+        public UniverseBuilder withName(String name) throws InvalidUniverseNameException {
             this.name = new UniverseName(name);
             return this;
         }

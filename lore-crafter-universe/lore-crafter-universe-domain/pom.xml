@@ -15,24 +15,41 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependencies versions -->
-        <org.junit.jupiter-version>5.12.2</org.junit.jupiter-version>
-        <org.mockito-version>5.17.0</org.mockito-version>
+        <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
+        <org.junit.jupiter.version>5.12.2</org.junit.jupiter.version>
+        <org.mockito.version>5.17.0</org.mockito.version>
+        <assertj-core.version>3.27.3</assertj-core.version>
     </properties>
 
     <dependencies>
+
+        <!-- To constraints on objects -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta.validation-api.version}</version>
+        </dependency>
 
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${org.junit.jupiter-version}</version>
+            <version>${org.junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${org.mockito-version}</version>
+            <version>${org.mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Add some assertions more fluent and lisible than junit ones -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

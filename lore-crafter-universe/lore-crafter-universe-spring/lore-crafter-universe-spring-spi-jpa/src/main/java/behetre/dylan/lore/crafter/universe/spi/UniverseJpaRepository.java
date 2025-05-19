@@ -1,9 +1,8 @@
 package behetre.dylan.lore.crafter.universe.spi;
 
+import behetre.dylan.lore.crafter.universe.domain.InvalidUniversePropertyException;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
-import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
-import behetre.dylan.lore.crafter.universe.domain.name.exception.UniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.AlreadyExistsUniverseException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
 import behetre.dylan.lore.crafter.universe.spi.entity.UniverseEntity;
@@ -37,7 +36,7 @@ public class UniverseJpaRepository implements UniverseRepository {
 
         try {
             return createdUniverseEntity.toUniverse();
-        } catch (NoUniverseIdentifierException | UniverseNameException e) {
+        } catch (InvalidUniversePropertyException e) {
             throw new UniverseCreationException(e);
         }
 

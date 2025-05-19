@@ -1,8 +1,8 @@
 package behetre.dylan.lore.crafter.universe.domain.identifier;
 
+import behetre.dylan.lore.crafter.universe.domain.identifier.exception.NoUniverseIdentifierException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UniverseIdentifierTest {
 
@@ -13,7 +13,15 @@ class UniverseIdentifierTest {
 
         // assert
         final long expectedLongValue = 1L;
-        assertEquals(expectedLongValue, universeIdentifier.toLong());
+        Assertions.assertThat(universeIdentifier.toLong())
+                  .isEqualTo(expectedLongValue);
+    }
+
+    @Test
+    void givenNullIdentifierValue_whenConstruct_thenThrowDedicatedException() {
+        Assertions.assertThatThrownBy(() -> new UniverseIdentifier(null))
+                  .isExactlyInstanceOf(NoUniverseIdentifierException.class)
+                  .hasMessage("Universe identifier cannot be null");
     }
 
 }
