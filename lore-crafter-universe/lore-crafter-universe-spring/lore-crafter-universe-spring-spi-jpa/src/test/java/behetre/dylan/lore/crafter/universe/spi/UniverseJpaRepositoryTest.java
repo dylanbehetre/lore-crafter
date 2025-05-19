@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class UniverseJpaRepositoryTest {
@@ -36,6 +37,7 @@ class UniverseJpaRepositoryTest {
     }
 
     @Test
+    @Transactional
     void givenNoUniverse_whenCreateOne_thenItIsCreated() throws UniverseNameException, UniverseCreationException {
         // arrange
         final UniverseName expectedUniverseName = new UniverseName("Some Universe name");
@@ -53,6 +55,30 @@ class UniverseJpaRepositoryTest {
         Assertions.assertThat(createdUniverse.description()).isEqualTo(expectedUniverseDescription);
 
         Assertions.assertThat(testedRepository.contains(expectedUniverseName)).isTrue();
+    }
+
+    @Test
+    @Transactional
+    void givenOneUniverse_whenCreateAnotherWithSameName_thenItIsCreated() throws UniverseNameException, UniverseCreationException {
+        // arrange
+        final Universe alreadyExistingUniverse = testedRepository.create(
+                new CreateUniverseCommand(
+                        new UniverseName("Some Universe name"),
+                        new UniverseDescription("Some Universe description")
+                )
+        );
+
+        final CreateUniverseCommand newCreateUniverseCommand = new CreateUniverseCommand(
+                alreadyExistingUniverse.name(),
+                new UniverseDescription("Some new Universe description")
+        );
+
+        // act
+        Assertions.assertThatThrownBy(() -> this.testedRepository.create(newCreateUniverseCommand))
+                  .isInstanceOf(UniverseCreationException.class)
+                  .hasMessageContaining(
+                          String.format("Universe with name '%s' already exists", alreadyExistingUniverse.name())
+                  );
     }
 
 }
