@@ -4,7 +4,7 @@ import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.description.UniverseDescription;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.InvalidUniverseNameException;
-import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.UniverseCreationCommand;
 import behetre.dylan.lore.crafter.universe.spi.container.DatabaseContainer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
@@ -43,7 +43,7 @@ class UniverseJpaRepositoryTest {
         final UniverseName expectedUniverseName = new UniverseName("Some Universe name");
         final UniverseDescription expectedUniverseDescription = new UniverseDescription("Some Universe description");
 
-        final CreateUniverseCommand command = new CreateUniverseCommand(expectedUniverseName, expectedUniverseDescription);
+        final UniverseCreationCommand command = new UniverseCreationCommand(expectedUniverseName, expectedUniverseDescription);
 
         // act
         final Universe createdUniverse = testedRepository.create(command);
@@ -62,19 +62,19 @@ class UniverseJpaRepositoryTest {
     void givenOneUniverse_whenCreateAnotherWithSameName_thenItIsCreated() throws InvalidUniverseNameException, UniverseCreationException {
         // arrange
         final Universe alreadyExistingUniverse = testedRepository.create(
-                new CreateUniverseCommand(
+                new UniverseCreationCommand(
                         new UniverseName("Some Universe name"),
                         new UniverseDescription("Some Universe description")
                 )
         );
 
-        final CreateUniverseCommand newCreateUniverseCommand = new CreateUniverseCommand(
+        final UniverseCreationCommand newUniverseCreationCommand = new UniverseCreationCommand(
                 alreadyExistingUniverse.name(),
                 new UniverseDescription("Some new Universe description")
         );
 
         // act
-        Assertions.assertThatThrownBy(() -> this.testedRepository.create(newCreateUniverseCommand))
+        Assertions.assertThatThrownBy(() -> this.testedRepository.create(newUniverseCreationCommand))
                   .isInstanceOf(UniverseCreationException.class)
                   .hasMessageContaining(
                           String.format("Universe with name '%s' already exists", alreadyExistingUniverse.name())

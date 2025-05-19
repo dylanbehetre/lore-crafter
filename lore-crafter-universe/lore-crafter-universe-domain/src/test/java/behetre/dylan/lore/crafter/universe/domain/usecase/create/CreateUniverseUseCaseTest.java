@@ -26,7 +26,7 @@ class CreateUniverseUseCaseTest {
     void givenConformCreateUniverseCommand_whenCreate_thenUniverseCreated() throws Exception {
         // arrange
         final Universe validUniverseToCreate = this.validUniverse;
-        final CreateUniverseCommand createUniverseCommand = new CreateUniverseCommand(
+        final UniverseCreationCommand universeCreationCommand = new UniverseCreationCommand(
                 validUniverseToCreate.name(),
                 validUniverseToCreate.description()
         );
@@ -37,7 +37,7 @@ class CreateUniverseUseCaseTest {
         final CreateUniverseUseCase createUniverseUseCase = new CreateUniverseUseCase(universeRepository);
 
         // act
-        final Universe createdUniverse = createUniverseUseCase.execute(createUniverseCommand);
+        final Universe createdUniverse = createUniverseUseCase.execute(universeCreationCommand);
 
         // assert
         Assertions.assertAll("Service must return the created universe",
@@ -54,7 +54,7 @@ class CreateUniverseUseCaseTest {
     void givenAlreadyExistingUniverse_whenCreate_thenReceivedAnAlreadyExistUniverseException() {
         // arrange
         final Universe universe = this.validUniverse;
-        final CreateUniverseCommand createUniverseCommand = new CreateUniverseCommand(universe.name(), null);
+        final UniverseCreationCommand universeCreationCommand = new UniverseCreationCommand(universe.name(), null);
 
         final Collection<Universe> initialRepositoryContent = List.of(universe);
         final FakeUniverseRepository universeRepository = new FakeUniverseRepository(initialRepositoryContent);
@@ -64,7 +64,7 @@ class CreateUniverseUseCaseTest {
 
         // act
         final AlreadyExistsUniverseException exception = Assertions.assertThrows(AlreadyExistsUniverseException.class,
-                () -> createUniverseUseCase.execute(createUniverseCommand)
+                () -> createUniverseUseCase.execute(universeCreationCommand)
         );
 
         // assert

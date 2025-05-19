@@ -2,7 +2,7 @@ package behetre.dylan.lore.crafter.universe.spi;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.name.UniverseName;
-import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseCommand;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.UniverseCreationCommand;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,10 +24,10 @@ public class FakeUniverseRepository implements UniverseRepository {
     }
 
     @Override
-    public Universe create(CreateUniverseCommand createUniverseCommand) throws UniverseCreationException {
+    public Universe create(UniverseCreationCommand universeCreationCommand) throws UniverseCreationException {
         try {
-            this.universeByName.put(createUniverseCommand.name(), toUniverse(createUniverseCommand));
-            return this.universeByName.get(createUniverseCommand.name());
+            this.universeByName.put(universeCreationCommand.name(), toUniverse(universeCreationCommand));
+            return this.universeByName.get(universeCreationCommand.name());
         } catch (Exception exception) {
             throw new UniverseCreationException(exception);
         }
@@ -42,11 +42,11 @@ public class FakeUniverseRepository implements UniverseRepository {
         return this.universeByName.size();
     }
 
-    private Universe toUniverse(CreateUniverseCommand createUniverseCommand) throws Exception {
+    private Universe toUniverse(UniverseCreationCommand universeCreationCommand) throws Exception {
         return Universe.builder()
                        .withIdentifier(this.getUniverseCount() + 1L)
-                       .withName(createUniverseCommand.name())
-                       .withDescription(createUniverseCommand.description())
+                       .withName(universeCreationCommand.name())
+                       .withDescription(universeCreationCommand.description())
                        .build();
     }
 

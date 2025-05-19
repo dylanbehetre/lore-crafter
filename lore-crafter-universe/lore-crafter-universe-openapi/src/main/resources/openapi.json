@@ -25,7 +25,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUniverseCommand"
+                "$ref": "#/components/schemas/UniverseCreationCommand"
               }
             }
           }
@@ -45,7 +45,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UniverseCreated"
+                  "$ref": "#/components/schemas/UniverseCreationResult"
                 }
               }
             }
@@ -66,7 +66,7 @@
   },
   "components": {
     "schemas": {
-      "CreateUniverseCommand": {
+      "UniverseCreationCommand": {
         "type": "object",
         "required": [
           "name"
@@ -82,7 +82,7 @@
           }
         }
       },
-      "UniverseCreated": {
+      "UniverseCreationResult": {
         "type": "object",
         "required": [
           "id"

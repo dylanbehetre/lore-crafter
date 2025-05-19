@@ -13,10 +13,10 @@ public class CreateUniverseUseCase {
         this.universeRepository = universeRepository;
     }
 
-    public Universe execute(CreateUniverseCommand createUniverseCommand) throws AlreadyExistsUniverseException, UniverseCreationException {
-        assertUniqueUniverseName(createUniverseCommand.name());
+    public Universe execute(UniverseCreationCommand universeCreationCommand) throws AlreadyExistsUniverseException, UniverseCreationException {
+        assertUniqueUniverseName(universeCreationCommand.name());
 
-        return this.universeRepository.create(createUniverseCommand);
+        return this.universeRepository.create(universeCreationCommand);
     }
 
     private void assertUniqueUniverseName(final UniverseName universeName) throws AlreadyExistsUniverseException {
