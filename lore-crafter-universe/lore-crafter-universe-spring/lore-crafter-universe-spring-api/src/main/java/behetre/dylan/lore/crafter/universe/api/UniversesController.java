@@ -1,8 +1,8 @@
 package behetre.dylan.lore.crafter.universe.api;
 
 import behetre.dylan.lore.crafter.universe.api.create.CreateUniverseCommandWrapper;
-import behetre.dylan.lore.crafter.universe.api.model.CreateUniverseCommand;
-import behetre.dylan.lore.crafter.universe.api.model.UniverseCreated;
+import behetre.dylan.lore.crafter.universe.api.model.UniverseCreationCommand;
+import behetre.dylan.lore.crafter.universe.api.model.UniverseCreationResult;
 import behetre.dylan.lore.crafter.universe.domain.Universe;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.EmptyUniverseNameException;
 import behetre.dylan.lore.crafter.universe.domain.name.exception.NoUniverseNameException;
@@ -20,6 +20,8 @@ import java.net.URI;
 @RestController
 public class UniversesController implements UniversesApi {
 
+    // 
+
     private final CreateUniverseUseCase createUniverseUseCase;
 
     @Autowired
@@ -28,25 +30,25 @@ public class UniversesController implements UniversesApi {
     }
 
     @Override
-    public ResponseEntity<UniverseCreated> createUniverse(CreateUniverseCommand createUniverseCommand) throws NoUniverseNameException, EmptyUniverseNameException, UniverseCreationException, AlreadyExistsUniverseException {
+    public ResponseEntity<UniverseCreationResult> createUniverse(UniverseCreationCommand createUniverseCommand) throws NoUniverseNameException, EmptyUniverseNameException, UniverseCreationException, AlreadyExistsUniverseException {
 
         final Universe domainCreatedUniverse = this.createUniverseUseCase.execute(new CreateUniverseCommandWrapper(createUniverseCommand).toDomainModel());
-        final UniverseCreated responseBody = toUniverseCreated(domainCreatedUniverse);
+        final UniverseCreationResult responseBody = toUniverseCreationResult(domainCreatedUniverse);
 
         return ResponseEntity.created(buildCreatedUniverseUriLocation(domainCreatedUniverse))
                              .body(responseBody);
     }
 
-    private static UniverseCreated toUniverseCreated(Universe domainCreatedUniverse) {
+    private static UniverseCreationResult toUniverseCreationResult(Universe domainCreatedUniverse) {
         final BigDecimal universeId = new BigDecimal(domainCreatedUniverse.id().toLong());
-        return new UniverseCreated(universeId);
+        return new UniverseCreationResult(universeId);
     }
 
     private static URI buildCreatedUniverseUriLocation(Universe createdUniverse) {
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(createdUniverse.id())
+                .buildAndExpand(createdUniverse.id().toLong())
                 .toUri();
     }
 
