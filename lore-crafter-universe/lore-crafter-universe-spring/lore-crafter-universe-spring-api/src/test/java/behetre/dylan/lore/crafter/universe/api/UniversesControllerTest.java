@@ -1,8 +1,10 @@
 package behetre.dylan.lore.crafter.universe.api;
 
 import behetre.dylan.lore.crafter.universe.domain.Universe;
+import behetre.dylan.lore.crafter.universe.domain.usecase.create.AlreadyExistsUniverseException;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.CreateUniverseUseCase;
 import behetre.dylan.lore.crafter.universe.domain.usecase.create.UniverseCreationCommand;
+import behetre.dylan.lore.crafter.universe.spi.UniverseCreationException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -134,6 +136,74 @@ class UniversesControllerTest {
                                "detail": "Universe name property cannot be empty"
                              }
                              """
+                     ));
+    }
+
+    @Test
+    void givenUniverseCreationCommandWithAlreadyExistingName_whenCreateUniverse_then409Conflict() throws Exception {
+        // arrange
+        Mockito.when(this.createUniverseUseCase.execute(Mockito.any()))
+               .thenThrow(new AlreadyExistsUniverseException(VALID_UNIVERSE.name()));
+
+        // act
+        final ResultActions requestResult = this.mockMvc.perform(
+                MockMvcRequestBuilders.post(POST_UNIVERSES_PATH)
+                                      .contentType(MediaType.APPLICATION_JSON)
+                                      .content("""
+                                                      {
+                                                        "name": "%s",
+                                                        "description": "%s"
+                                                      }""".formatted(
+                                                      VALID_UNIVERSE.name(),
+                                                      VALID_UNIVERSE.description()
+                                              )
+                                      )
+        );
+
+        // assert
+        requestResult.andExpect(status().isConflict())
+                     .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                     .andExpect(content().json("""
+                             {
+                               "status": 409,
+                               "detail": "Universe name '%s' already exists"
+                             }
+                             """.formatted(VALID_UNIVERSE.name())
+                     ));
+    }
+
+    @Test
+    void givenUniverseCreationCommandThatThrow_whenCreateUniverse_then500InternalServerError() throws Exception {
+        // arrange
+        final Exception wrappedException = new RuntimeException();
+
+        Mockito.when(this.createUniverseUseCase.execute(Mockito.any()))
+               .thenThrow(new UniverseCreationException(wrappedException));
+
+        // act
+        final ResultActions requestResult = this.mockMvc.perform(
+                MockMvcRequestBuilders.post(POST_UNIVERSES_PATH)
+                                      .contentType(MediaType.APPLICATION_JSON)
+                                      .content("""
+                                                      {
+                                                        "name": "%s",
+                                                        "description": "%s"
+                                                      }""".formatted(
+                                                      VALID_UNIVERSE.name(),
+                                                      VALID_UNIVERSE.description()
+                                              )
+                                      )
+        );
+
+        // assert
+        requestResult.andExpect(status().isInternalServerError())
+                     .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                     .andExpect(content().json("""
+                             {
+                               "status": 500,
+                               "detail": "Something go wrong when creating universe: %s"
+                             }
+                             """.formatted(wrappedException.getMessage())
                      ));
     }
 
