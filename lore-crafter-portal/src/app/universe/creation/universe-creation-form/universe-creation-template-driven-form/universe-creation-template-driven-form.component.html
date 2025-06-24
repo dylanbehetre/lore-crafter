@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSubmit()"
+      #universeForm="ngForm">
+  <div class="label-field-form-group">
+    <label for="input-name">Nom : </label>
+    <input id="input-name" type="text"
+           [(ngModel)]="creatingUniverseModelSignal().name" name="name"
+           #name="ngModel"
+           required>
+    <div [hidden]="name.valid || name.pristine"
+         class="alert alert-danger">
+      Name is required
+    </div>
+  </div>
+  <div class="label-field-form-group">
+    <label for="input-description">Description : </label>
+    <input id="input-description" type="text"
+           [(ngModel)]="creatingUniverseModelSignal().description" name="description">
+  </div>
+  <button type="submit" [disabled]="!universeForm.valid">Créer</button>
+</form>

@@ -1,13 +1,15 @@
 import {Routes} from '@angular/router';
-import {UniverseCreationForm} from './universe/creation/universe-creation-form/universe-creation-form';
+import {
+  UniverseCreationFormComponent
+} from './universe/creation/universe-creation-form/universe-creation-form.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: UniverseCreationForm,
+    component: UniverseCreationFormComponent,
   },
   {
     path: 'universe',
-    component: UniverseCreationForm,
+    component: UniverseCreationFormComponent,
   }
 ];
